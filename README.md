@@ -17,6 +17,6 @@ No installation required
 
 
 # Demo and Instructions for use
-- Raw sequencing data and the processed data table required for running the pipeline are deposited in NCBI's Gene Expression Omnibus (GEO) as XXXXX.
+- Raw sequencing data and the processed data table required for running the pipeline are deposited in NCBI's Gene Expression Omnibus (GEO) as GSE244612 and GSE270792.
 - Needed scripts are located in each folder and properly commented.
 
