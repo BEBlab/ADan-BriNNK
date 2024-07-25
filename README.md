@@ -2,7 +2,7 @@
 
 Pipeline to replicate the analysis and figures in: 
 <a href="https://www.biorxiv.org/content/10.1101/2023.09.15.557952v1">Deep mutagenesis reveals the distinct mutational landscape of ADan and ABri amyloid nucleation</a>
-(Mariano Martín, Benedetta Bolognesi, 2023)
+(Mariano Martín, Benedetta Bolognesi, 2024)
 
 
 # System requirements
