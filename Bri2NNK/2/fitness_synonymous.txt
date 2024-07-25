@@ -1,0 +1,2 @@
+nt_seq aa_seq Nham_nt Nham_aa Nmut_codons WT indel STOP STOP_readthrough count_e2_s0 count_e2_s1 mean_count fitness2_uncorr sigma2_uncorr fitness sigma
+ttttgttagtttgatgtgcatgagtgtctgtagtgt FC*FDVHECL*C 0 0 0 TRUE FALSE TRUE FALSE 425 3102 425 0 0.0731479847879459 0 0.0731479847879459

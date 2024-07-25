@@ -1,0 +1,2 @@
+nt_seq aa_seq Nham_nt Nham_aa Nmut_codons WT indel STOP STOP_readthrough count_e3_s0 count_e3_s1 mean_count fitness3_uncorr sigma3_uncorr fitness sigma
+NA WKGTMVVGSNWP NA 0 NA TRUE FALSE FALSE FALSE 350 4 350 0 0.711135912265922 0 0.711135912265922

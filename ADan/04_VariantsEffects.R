@@ -9,6 +9,7 @@ path="04_VariantsEffects"
 #required data:
 load("nscore_df_ADan.RData")
 
+
 #
 peptide_seq<-"EASNCFAIRHFENKFAVETLICFNLFLNSQEKHY"
 peptide_seq<-c(strsplit(peptide_seq, '')[[1]])
@@ -275,8 +276,41 @@ ggsave(p_hvc, path=path, file="p_heatmap_violin_categories_nscore.jpg", width=11
 ###
 
 # Effect of SNVs on nucleation:
-print(fdr_categories[fdr_categories$SNVs == T,] %>% group_by(category) %>% dplyr::summarise(Freq_p=n()))
+SNV_df<-singles_stops
 
+SNV_df$category<-"WT-like"
+SNV_df[SNV_df$low_sigma == F,]$category<- "unknown"
+SNV_df[(SNV_df$p.adjust<0.1 & SNV_df$nscore_c<0),]$category<- "NS-"
+SNV_df[(SNV_df$p.adjust<0.1 & SNV_df$nscore_c>0),]$category<- "NS+"
+
+SNV_df$SNVs<-""
+SNV_df[(SNV_df$aa_seq %in% SNVs$aa_seq) & (SNV_df$ID != "syn"), "SNVs"]<-"|"
+
+SNV_df$Comb_mut<-""
+SNV_df[SNV_df$ID=="E-1-K",]$Comb_mut<-"|"
+SNV_df[SNV_df$ID=="S-3-N",]$Comb_mut<-"|"
+SNV_df[SNV_df$ID=="C-5-Y",]$Comb_mut<-"|"
+SNV_df[SNV_df$ID=="F-6-L",]$Comb_mut<-"|"
+SNV_df[SNV_df$ID=="A-7-S",]$Comb_mut<-"|"
+SNV_df[SNV_df$ID=="A-7-T",]$Comb_mut<-"|"
+SNV_df[SNV_df$ID=="I-8-V",]$Comb_mut<-"|"
+SNV_df[SNV_df$ID=="R-9-Q",]$Comb_mut<-"|"
+SNV_df[SNV_df$ID=="K-14-E",]$Comb_mut<-"|"
+SNV_df[SNV_df$ID=="A-16-V",]$Comb_mut<-"|"
+SNV_df[SNV_df$ID=="V-17-M",]$Comb_mut<-"|"
+SNV_df[SNV_df$ID=="L-20-S",]$Comb_mut<-"|"
+SNV_df[SNV_df$ID=="L-20-V",]$Comb_mut<-"|"
+SNV_df[SNV_df$ID=="I-21-V",]$Comb_mut<-"|"
+SNV_df[SNV_df$ID=="S-29-G",]$Comb_mut<-"|"
+SNV_df[SNV_df$ID=="K-32-T",]$Comb_mut<-"|"
+SNV_df[SNV_df$ID=="H-33-Y",]$Comb_mut<-"|"
+SNV_df[SNV_df$ID=="Y-34-H",]$Comb_mut<-"|"
+
+# reported SNPs
+SNV_df %>% group_by(Comb_mut, category) %>% dplyr::summarise(Freq_p=n())
+
+# all SNVs
+SNV_df %>% group_by(SNVs, category) %>% dplyr::summarise(Freq_p=n())
 
 ##################################################################################
 ####  heatmap FDR
@@ -466,7 +500,12 @@ p_categories_p_all
 
 ggsave(p_categories_p_all, path=path, file="p_categories_p_all.jpg", width=4, height=4)
 
+######
+fdr_categories_all$region<-"flanking"
+fdr_categories_all[fdr_categories_all$Pos>19 & fdr_categories_all$Pos<26, "region"]<-"core"
 
-
-
-
+categories_p_grouped<-fdr_categories_all %>% group_by(region, category) %>% dplyr::summarise(Freq_p=n()) 
+categories_p_grouped$freq_norm<-0
+categories_p_grouped[categories_p_grouped$region == "core", "freq_norm"]<-categories_p_grouped[categories_p_grouped$region == "core", "Freq_p"]/6
+categories_p_grouped[categories_p_grouped$region == "flanking", "freq_norm"]<-categories_p_grouped[categories_p_grouped$region == "flanking", "Freq_p"]/28
+categories_p_grouped

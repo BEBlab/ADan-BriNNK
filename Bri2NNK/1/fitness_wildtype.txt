@@ -1,0 +1,2 @@
+nt_seq aa_seq Nham_nt Nham_aa Nmut_codons WT indel STOP STOP_readthrough count_e1_s0 count_e1_s1 mean_count fitness1_uncorr sigma1_uncorr fitness sigma
+NA L*VAQEVNTYT* NA 0 NA TRUE FALSE TRUE FALSE 388 33 388 0 0.25643849122415 0 0.25643849122415
