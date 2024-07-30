@@ -4,7 +4,6 @@ library(ggpubr)
 require(stringr)
 library(ggsignif)
 require("ggrepel")
-require(ggseqlogo)
 library(esc)
 
 
@@ -349,11 +348,6 @@ p_scatter_nucleators
 
 ggsave(p_scatter_nucleators, file="AA_frequency_nucleators_posnormall.jpg", width = 14, height = 8, path=path)
 
-###
-
-logo<-ggseqlogo(nucleators_nucleators$aa_seq_cor)
-logo
-ggsave(logo, file=paste0("Logo_nucleators.jpg"), width = 8, height = 5, path=path)
 
 ################################################################################################################
 # Work with top 10%
