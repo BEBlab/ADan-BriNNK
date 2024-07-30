@@ -1,7 +1,7 @@
-# Deep mutagenesis reveals the distinct mutational landscape of ADan and ABri amyloid nucleation
+# Amyloids “at the border”: deep mutagenesis and random sequence extension reveal an incomplete amyloid-forming motif in Bri2 that turns amyloidogenic upon C-terminal extension
 
 Pipeline to replicate the analysis and figures in: 
-<a href="https://www.biorxiv.org/content/10.1101/2023.09.15.557952v1">Deep mutagenesis reveals the distinct mutational landscape of ADan and ABri amyloid nucleation</a>
+<a href="https://www.biorxiv.org/content/10.1101/2023.09.15.557952v1">Amyloids “at the border”: deep mutagenesis and random sequence extension reveal an incomplete amyloid-forming motif in Bri2 that turns amyloidogenic upon C-terminal extension</a>
 (Mariano Martín, Benedetta Bolognesi, 2024)
 
 
