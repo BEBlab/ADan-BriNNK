@@ -165,7 +165,7 @@ p_violin_m<-ggplot(heatmap_df, aes(x=factor(Mut, levels=rev(vectorAA)), y=nscore
 
 p_violin_m
 
-ggsave(p_violin_m, file="p_violinplot_mut.jpg",width=4, height=8)
+ggsave(p_violin_m, file="p_violinplot_mut.jpg",width=4, height=8, path=path)
 
 #### stacked bars
 # Considering stops
@@ -500,12 +500,4 @@ p_categories_p_all
 
 ggsave(p_categories_p_all, path=path, file="p_categories_p_all.jpg", width=4, height=4)
 
-######
-fdr_categories_all$region<-"flanking"
-fdr_categories_all[fdr_categories_all$Pos>19 & fdr_categories_all$Pos<26, "region"]<-"core"
 
-categories_p_grouped<-fdr_categories_all %>% group_by(region, category) %>% dplyr::summarise(Freq_p=n()) 
-categories_p_grouped$freq_norm<-0
-categories_p_grouped[categories_p_grouped$region == "core", "freq_norm"]<-categories_p_grouped[categories_p_grouped$region == "core", "Freq_p"]/6
-categories_p_grouped[categories_p_grouped$region == "flanking", "freq_norm"]<-categories_p_grouped[categories_p_grouped$region == "flanking", "Freq_p"]/28
-categories_p_grouped

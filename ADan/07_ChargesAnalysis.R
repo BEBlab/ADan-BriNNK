@@ -81,26 +81,3 @@ p1
 ggsave(p1, file="NetCharge_TotalChargedResidues_NS.jpg", width = 10, height = 4, path=path)
 
 
-# NS - Net Charge - Number of Charged Residues
-
-
-text_map<-singles %>% group_by(Pos_charge, Neg_charge) %>% summarise(across(nscore_c, mean))
-text_map$Net_charge<-text_map$Pos_charge+text_map$Neg_charge
-
-p2<-ggplot(singles, aes(x=Nham_aa, y=nscore_c))+
-  geom_hline(yintercept = 0, color="black", linetype="dashed", size=0.3)+
-  geom_violin(fill="grey80")+
-  geom_boxplot(width=0.1, outlier.shape = NA, size=0.3)+
-  geom_text(data=text_map, aes(label=Net_charge, x=-Inf, y=-Inf), size=4, hjust=-1, vjust=-0.5)+
-  scale_y_continuous("Nucleation Score", sec.axis = sec_axis(~ . + 10,  name="Positively charged residues"))+
-  facet_grid(rows = vars(Pos_charge), cols = vars(Neg_charge*-1), switch = "x")+
-  labs(x= "Negatively charged residues", fill= "", title="")+
-  theme_bw()+
-  theme(axis.text.x=element_blank(),
-        axis.ticks.x=element_blank(),
-        axis.text.y.right=element_blank(),
-        axis.ticks.y.right = element_blank(),
-        legend.position="right")
-p2
-
-ggsave(p2, file="PosChargedResiudes_NegChargedResidues_NS.jpg", width = 3, height = 4, path=path)

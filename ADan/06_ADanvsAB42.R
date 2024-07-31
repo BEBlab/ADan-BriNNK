@@ -201,42 +201,6 @@ p_corr_all_pos_mut
 ggsave(p_corr_all_pos_mut, file="Corr_singles_nscore_pos_ADan_AB42.jpg", width = 5, height = 4, path=path)
 
 
-# 
-corr_vector=c()
-for(i in singles_ADan_AB42$Pos){
-  correlation<-cor.test(singles_ADan_AB42[singles_ADan_AB42$Pos==i,][["nscore_c_ADan"]],
-                        singles_ADan_AB42[singles_ADan_AB42$Pos==i,][["nscore_c_AB42"]], use="complete.obs")
-  corr<-correlation$estimate
-  p_value<-correlation$p.value
-  corr_vector=c(corr_vector, i, corr, p_value)
-}
-
-corr_text <- data.frame(matrix(corr_vector, ncol=3, byrow = T))
-colnames(corr_text)<-c("Pos", "corr","pvalue")
-for(i in c(2:3)){corr_text[[i]]<-as.numeric(as.character(corr_text[[i]]))}
-
-
-###
-p_corr_pos<-ggplot(singles_ADan_AB42, aes(x=nscore_c_ADan, y=nscore_c_AB42))+
-  geom_rect(data = singles_ADan_AB42, fill = "white", xmin = -Inf, xmax = Inf,
-            ymin = -Inf, ymax = Inf, alpha = 0.05)+
-  geom_hline(yintercept = 0, linetype="dashed", color="darkgrey")+
-  geom_vline(xintercept = 0, linetype="dashed", color="darkgrey")+
-  geom_point()+
-  theme_bw()+
-  facet_wrap(~factor(Pos))+
-  theme(panel.grid = element_blank(),
-        plot.title = element_text(hjust = 0.5))+
-  geom_text(data=corr_text, aes(label=paste0("R=",round(corr, 2)), x=-Inf, y=Inf), hjust=-0.1, vjust=1.5, size=4, colour="black")+
-  geom_text(data=corr_text, aes(label=paste0("p=", format(pvalue, digits = 2, scientific = T)), x=-Inf, y=Inf), hjust=-0.1, vjust=3, size=4, colour="black")+
-  geom_text(data=singles_ADan_AB42, aes(label=residue_ADan, x=-Inf, y=-Inf, color="orange"), hjust=-0.2, vjust=-0.5)+
-  geom_text(data=singles_ADan_AB42, aes(label=residue_AB42, x=Inf, y=-Inf, color="brown"), hjust=1.1, vjust=-0.5)+
-  scale_color_manual(name = "Residue", labels = c("AB42", "ADan"), values=c("brown", "orange"))+
-  labs(x="Nucleation Score ADan", y="Nucleation Score AB42", title="Substitution - Correlation per Position Substitution AA aligned N-term")
-p_corr_pos
-
-ggsave(p_corr_pos, file="Corr_singles_nscore_poseach_ADan_AB42.jpg", width = 12, height = 10, path=path)
-
 
 ### Correlation per aa change
 singles_ADan$type_change<-paste0(singles_ADan$type_wt, '-', singles_ADan$type_mut)
@@ -495,44 +459,6 @@ p_corr_all_pos_mut_cterm
 ggsave(p_corr_all_pos_mut_cterm, file="Corr_singles_nscore_pos_ADan_AB42_cterm.jpg", width = 5, height = 4, path=path)
 
 
-# 
-corr_vector=c()
-for(i in singles_ADan_AB42_cterm$pos_AB42){
-  correlation<-cor.test(singles_ADan_AB42_cterm[singles_ADan_AB42_cterm$pos_AB42==i,][["nscore_c_ADan"]],
-                        singles_ADan_AB42_cterm[singles_ADan_AB42_cterm$pos_AB42==i,][["nscore_c_AB42"]], use="complete.obs")
-  corr<-correlation$estimate
-  p_value<-correlation$p.value
-  corr_vector=c(corr_vector, i, corr, p_value)
-}
-
-corr_text <- data.frame(matrix(corr_vector, ncol=3, byrow = T))
-colnames(corr_text)<-c("pos_AB42", "corr","pvalue")
-for(i in c(2:3)){corr_text[[i]]<-as.numeric(as.character(corr_text[[i]]))}
-corr_text<-distinct(corr_text)
-
-###
-p_corr_pos_cterm<-ggplot(singles_ADan_AB42_cterm, aes(x=nscore_c_ADan, y=nscore_c_AB42))+
-  geom_rect(data = singles_ADan_AB42_cterm, fill = "white", xmin = -Inf, xmax = Inf,
-            ymin = -Inf, ymax = Inf, alpha = 0.05)+
-  geom_hline(yintercept = 0, linetype="dashed", color="darkgrey")+
-  geom_vline(xintercept = 0, linetype="dashed", color="darkgrey")+
-  geom_point()+
-  theme_bw()+
-  facet_wrap(~factor(pos_AB42))+
-  theme(panel.grid = element_blank(),
-        plot.title = element_text(hjust = 0.5))+
-  geom_text(data=corr_text, aes(label=paste0("R=", round(corr, 2)), x=-Inf, y=Inf), hjust=-0.1, vjust=1.5, size=4, colour="black")+
-  geom_text(data=corr_text, aes(label=paste0("p=", format(pvalue, digits = 2, scientific = T)), x=-Inf, y=Inf), hjust=-0.1, vjust=3, size=4, colour="black")+
-  geom_text(data=singles_ADan_AB42_cterm, aes(label=residue_ADan, x=-Inf, y=-Inf, color="orange"), hjust=-0.2, vjust=-0.5)+
-  geom_text(data=singles_ADan_AB42_cterm, aes(label=residue_AB42, x=Inf, y=-Inf, color="brown"), hjust=1.1, vjust=-0.5)+
-  scale_color_manual(name = "Residue", labels = c("AB42", "ADan"), values=c("brown", "orange"))+
-  labs(x="Nucleation Score ADan", y="Nucleation Score AB42", title="Substitution - Correlation per Position Substitution AA in aligned at C-term")
-p_corr_pos_cterm
-
-ggsave(p_corr_pos_cterm, file="Corr_singles_nscore_poseach_ADan_AB42_cterm.jpg", width = 12, height = 10, path=path)
-
-
-
 
 
 ################################################################################
@@ -627,41 +553,6 @@ p_corr_all_pos_mut_align
 ggsave(p_corr_all_pos_mut_align, file="Corr_singles_nscore_pos_ADan_AB42_aligned.jpg", width = 5, height = 4, path=path)
 
 
-# 
-corr_vector=c()
-for(i in singles_ADan_AB42_align$pos_AB42){
-  correlation<-cor.test(singles_ADan_AB42_align[singles_ADan_AB42_align$pos_AB42==i,][["nscore_c_ADan"]],
-                        singles_ADan_AB42_align[singles_ADan_AB42_align$pos_AB42==i,][["nscore_c_AB42"]], use="complete.obs")
-  corr<-correlation$estimate
-  p_value<-correlation$p.value
-  corr_vector=c(corr_vector, i, corr, p_value)
-}
-
-corr_text <- data.frame(matrix(corr_vector, ncol=3, byrow = T))
-colnames(corr_text)<-c("pos_AB42", "corr","pvalue")
-for(i in c(2:3)){corr_text[[i]]<-as.numeric(as.character(corr_text[[i]]))}
-corr_text<-distinct(corr_text)
-
-###
-p_corr_pos_align<-ggplot(singles_ADan_AB42_align, aes(x=nscore_c_ADan, y=nscore_c_AB42))+
-  geom_rect(data = singles_ADan_AB42_align, fill = "white", xmin = -Inf, xmax = Inf,
-            ymin = -Inf, ymax = Inf, alpha = 0.05)+
-  geom_hline(yintercept = 0, linetype="dashed", color="darkgrey")+
-  geom_vline(xintercept = 0, linetype="dashed", color="darkgrey")+
-  geom_point()+
-  theme_bw()+
-  facet_wrap(~factor(pos_AB42))+
-  theme(panel.grid = element_blank(),
-        plot.title = element_text(hjust = 0.5))+
-  geom_text(data=corr_text, aes(label=paste0("R=", round(corr, 2)), x=-Inf, y=Inf), hjust=-0.1, vjust=1.5, size=4, colour="black")+
-  geom_text(data=corr_text, aes(label=paste0("p=", format(pvalue, digits = 2, scientific = T)), x=-Inf, y=Inf), hjust=-0.1, vjust=3, size=4, colour="black")+
-  geom_text(data=singles_ADan_AB42_align, aes(label=residue_ADan, x=-Inf, y=-Inf, color="orange"), hjust=-0.2, vjust=-0.5)+
-  geom_text(data=singles_ADan_AB42_align, aes(label=residue_AB42, x=Inf, y=-Inf, color="brown"), hjust=1.1, vjust=-0.5)+
-  scale_color_manual(name = "Residue", labels = c("AB42", "ADan"), values=c("brown", "orange"))+
-  labs(x="Nucleation Score ADan", y="Nucleation Score AB42", title="Substitution - Correlation per Position Substitution AA in aligned sequences")
-p_corr_pos_align
-
-ggsave(p_corr_pos_align, file="Corr_singles_nscore_poseach_ADan_AB42_align.jpg", width = 12, height = 10, path=path)
 
 
 

@@ -556,7 +556,7 @@ p_hist_06_all<-ggplot(all_variants_df_grouped[all_variants_df_grouped$Bri2_nterm
   scale_fill_manual(values=c("#DF9292", "#7979BE", "darkblue"))+
   scale_y_break(c(15, 100), scales=.3, space = .4)+
   #scale_y_continuous(n.breaks=3)+
-  labs(x="Nucleation Score", fill="Category", title="Bri2 23 aa long + random")+
+  labs(x="Nucleation Score", fill="Category", title="ABri-like random dataset")+
   theme_classic()+
   theme(#legend.position = c(.8, .85),
         axis.text = element_text(size=18),

@@ -1,4 +1,4 @@
+ADan/ADan_2_variant_data_merge.tsv filter=lfs diff=lfs merge=lfs -text
 Bri2NNK/1/Bri2_12NNK_01_variant_data_merge.tsv filter=lfs diff=lfs merge=lfs -text
 Bri2NNK/2/Bri2_12NNK_02_variant_data_merge.tsv filter=lfs diff=lfs merge=lfs -text
-Bri2NNK/3/Bri2_12NNK_02_variant_data_merge.tsv filter=lfs diff=lfs merge=lfs -text
 Bri2NNK/3/Bri2_12NNK_03_variant_data_merge.tsv filter=lfs diff=lfs merge=lfs -text

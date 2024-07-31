@@ -635,7 +635,7 @@ for (seq_len in 2:12){
   
   p_violin_p
   
-  ggsave(p_violin_p, file="p_violinplot_pos.jpg", width=9, height=4)
+  ggsave(p_violin_p, file="p_violinplot_pos.jpg", width=9, height=4, path=path)
   
   
   #
@@ -657,7 +657,7 @@ for (seq_len in 2:12){
   
   p_violin_m
   
-  ggsave(p_violin_m, file="p_violinplot_AA.jpg", width=4, height=8)
+  ggsave(p_violin_m, file="p_violinplot_AA.jpg", width=4, height=8, path=path)
   
   ##################
   
